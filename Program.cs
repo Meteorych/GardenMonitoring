@@ -4,7 +4,6 @@ using GardenMonitoring.Models;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.DependencyInjection;
 
 namespace GardenMonitoring
 {
@@ -36,6 +35,7 @@ namespace GardenMonitoring
                     .RequireAuthenticatedUser()
                     .Build();
             });
+
 
             var app = builder.Build();
             using (var scope = app.Services.CreateScope())
