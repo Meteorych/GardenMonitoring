@@ -2,10 +2,10 @@
 
 #nullable disable
 
-namespace GardenMonitoring.Migrations
+namespace GardenMonitoring.Data.Migrations
 {
     /// <inheritdoc />
-    public partial class mssqllocal_migration_655 : Migration
+    public partial class AuthUserCreation : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)

@@ -17,5 +17,6 @@ namespace GardenMonitoring.Data
         public DbSet<GardenMonitoring.Models.Plant> Plant { get; set; } = default!;
         public DbSet<GardenMonitoring.Models.PlantClass> PlantClass { get; set; } = default!;
         public DbSet<GardenMonitoring.Models.PlantState> PlantState { get; set; } = default!;
+        public DbSet<GardenMonitoring.Models.Settings> Settings { get; set; } = default!;
     }
 }

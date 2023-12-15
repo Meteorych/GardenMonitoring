@@ -1,0 +1,74 @@
+﻿@model IEnumerable<GardenMonitoring.Models.Settings>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Index</h1>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.MaxTemperature)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.MinTemperature)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.MaxLight)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.MinLight)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.MaxPressure)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.MinPressure)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.MaxHumidity)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.MinHumidity)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.MaxTemperature)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.MinTemperature)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.MaxLight)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.MinLight)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.MaxPressure)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.MinPressure)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.MaxHumidity)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.MinHumidity)
+            </td>
+            <td>
+                <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
+                <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
+                <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>

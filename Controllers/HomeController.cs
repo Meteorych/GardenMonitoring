@@ -13,7 +13,6 @@ namespace GardenMonitoring.Controllers
         {
             _logger = logger;
         }
-        [AllowAnonymous]
         public IActionResult Index()
         {
             return View();

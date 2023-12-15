@@ -1,0 +1,69 @@
+﻿@model GardenMonitoring.Models.Settings
+
+@{
+    ViewData["Title"] = "Edit";
+}
+
+<h1>Edit</h1>
+
+<h4>Settings</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Edit">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input type="hidden" asp-for="Id" />
+            <div class="form-group">
+                <label asp-for="MaxTemperature" class="control-label"></label>
+                <input asp-for="MaxTemperature" class="form-control" />
+                <span asp-validation-for="MaxTemperature" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="MinTemperature" class="control-label"></label>
+                <input asp-for="MinTemperature" class="form-control" />
+                <span asp-validation-for="MinTemperature" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="MaxLight" class="control-label"></label>
+                <input asp-for="MaxLight" class="form-control" />
+                <span asp-validation-for="MaxLight" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="MinLight" class="control-label"></label>
+                <input asp-for="MinLight" class="form-control" />
+                <span asp-validation-for="MinLight" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="MaxPressure" class="control-label"></label>
+                <input asp-for="MaxPressure" class="form-control" />
+                <span asp-validation-for="MaxPressure" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="MinPressure" class="control-label"></label>
+                <input asp-for="MinPressure" class="form-control" />
+                <span asp-validation-for="MinPressure" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="MaxHumidity" class="control-label"></label>
+                <input asp-for="MaxHumidity" class="form-control" />
+                <span asp-validation-for="MaxHumidity" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="MinHumidity" class="control-label"></label>
+                <input asp-for="MinHumidity" class="form-control" />
+                <span asp-validation-for="MinHumidity" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Save" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}
