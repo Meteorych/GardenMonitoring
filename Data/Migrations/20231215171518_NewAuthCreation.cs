@@ -5,7 +5,7 @@
 namespace GardenMonitoring.Data.Migrations
 {
     /// <inheritdoc />
-    public partial class AuthUserCreation : Migration
+    public partial class NewAuthCreation : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)

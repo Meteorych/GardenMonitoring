@@ -4,6 +4,7 @@ using GardenMonitoring.Models;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
+using NuGet.Protocol.Plugins;
 
 namespace GardenMonitoring
 {
@@ -12,7 +13,6 @@ namespace GardenMonitoring
         public static void Main(string[] args)
         {
             var builder = WebApplication.CreateBuilder(args);
-            var movieApiKey = builder.Configuration["ConnectionStrings:ServiceApiKey"];
 			// Add services to the container.
 			builder.Services.AddDbContext<PlantContext>(options =>
                 options.UseSqlServer(builder.Configuration.GetConnectionString("PlantContext") ?? throw 
@@ -23,7 +23,12 @@ namespace GardenMonitoring
                     new InvalidOperationException("Connection string 'DefaultConnection' not found.")));
             builder.Services.AddDatabaseDeveloperPageExceptionFilter();
 
-            builder.Services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = true)
+
+            builder.Services.AddDefaultIdentity<IdentityUser>(options =>
+	            {
+		            options.SignIn.RequireConfirmedAccount = false;
+		            options.Password.RequireNonAlphanumeric = false;
+	            })
                 .AddRoles<IdentityRole>()
                 .AddEntityFrameworkStores<ApplicationDbContext>();
             builder.Services.AddControllersWithViews();
@@ -31,13 +36,18 @@ namespace GardenMonitoring
             // Authorization required for seeing database
             builder.Services.AddAuthorization(options =>
             {
-                options.FallbackPolicy = new AuthorizationPolicyBuilder()
+                options.AddPolicy("Require agronomist role", policy => 
+	                policy.RequireRole("Agronomist"));
+                options.AddPolicy("Require agricultural role", policy =>
+	                policy.RequireRole("Agricultural worker"));
+				options.FallbackPolicy = new AuthorizationPolicyBuilder()
                     .RequireAuthenticatedUser()
                     .Build();
             });
 
 
-            var app = builder.Build();
+            //Start application
+			var app = builder.Build();
             using (var scope = app.Services.CreateScope())
             {
                 var services = scope.ServiceProvider;
