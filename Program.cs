@@ -41,19 +41,20 @@ namespace GardenMonitoring
                 options.AddPolicy("Require agronomist role", policy => 
 	                policy.RequireRole("Agronomist"));
                 options.AddPolicy("Require agricultural role", policy =>
-	                policy.RequireRole("Agricultural worker"));
+	                policy.RequireRole("Agricultural"));
 				options.FallbackPolicy = new AuthorizationPolicyBuilder()
                     .RequireAuthenticatedUser()
                     .Build();
             });
 
-
-            //Start application
+			
+			//Start application
 			var app = builder.Build();
             using (var scope = app.Services.CreateScope())
             {
                 var services = scope.ServiceProvider;
                 PlantSeedInizialization.Initialize(services);
+                SeedRoles(services).Wait();
             }
 
             // Configure the HTTP request pipeline.
@@ -83,5 +84,21 @@ namespace GardenMonitoring
 
             app.Run();
         }
-    }
+        private static async Task SeedRoles(IServiceProvider serviceProvider)
+        {
+	        var roleManager = serviceProvider.GetRequiredService<RoleManager<IdentityRole>>();
+
+	        var roles = new[] { "Agronomist", "Agricultural" };
+
+	        foreach (var roleName in roles)
+	        {
+		        var roleExists = await roleManager.RoleExistsAsync(roleName);
+		        if (!roleExists)
+		        {
+			        var role = new IdentityRole(roleName);
+			        await roleManager.CreateAsync(role);
+		        }
+	        }
+        }
+	}
 }

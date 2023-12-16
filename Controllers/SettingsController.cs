@@ -7,10 +7,11 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using GardenMonitoring.Data;
 using GardenMonitoring.Models;
+using Microsoft.AspNetCore.Authorization;
 
 namespace GardenMonitoring.Controllers
 {
-    public class SettingsController : Controller
+	public class SettingsController : Controller
     {
         private readonly PlantContext _context;
 

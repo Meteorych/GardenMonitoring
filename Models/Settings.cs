@@ -2,7 +2,6 @@
 
 namespace GardenMonitoring.Models
 {
-	[Authorize(Roles = "Agronomist")]
 	public class Settings
 	{
 		public int Id { get; set; }
