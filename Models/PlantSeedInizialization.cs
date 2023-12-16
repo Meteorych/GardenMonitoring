@@ -16,8 +16,8 @@ namespace GardenMonitoring.Models
                 throw new ArgumentNullException(nameof(context), "Null movie logic context!");
             }
 
-            // Look for any movies.
-            if (context.Plant.Any() && context.PlantState.Any() && context.PlantClass.Any())
+            
+            if (context.Plant.Any() && context.PlantState.Any() && context.PlantClass.Any() && context.Settings.Any())
             {
                 return; // DB has been seeded
             }

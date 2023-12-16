@@ -24,10 +24,12 @@ namespace GardenMonitoring
             builder.Services.AddDatabaseDeveloperPageExceptionFilter();
 
 
-            builder.Services.AddDefaultIdentity<IdentityUser>(options =>
+            builder.Services.AddDefaultIdentity<ApplicationUser>(options =>
 	            {
 		            options.SignIn.RequireConfirmedAccount = false;
 		            options.Password.RequireNonAlphanumeric = false;
+                    options.User.RequireUniqueEmail = false;
+
 	            })
                 .AddRoles<IdentityRole>()
                 .AddEntityFrameworkStores<ApplicationDbContext>();
@@ -73,10 +75,10 @@ namespace GardenMonitoring
 
             app.UseAuthentication();
             app.UseAuthorization();
-
+            
             app.MapControllerRoute(
                 name: "default",
-                pattern: "{controller=Home}/{action=Index}/{id?}");
+                pattern: "{controller=Settings}/{action=Index}/{id?}");
             app.MapRazorPages();
 
             app.Run();
