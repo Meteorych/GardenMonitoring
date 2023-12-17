@@ -53,8 +53,8 @@ namespace GardenMonitoring
             using (var scope = app.Services.CreateScope())
             {
                 var services = scope.ServiceProvider;
-                PlantSeedInizialization.Initialize(services);
-                SeedRoles(services).Wait();
+                RolesSeedInitialization.Initialize(services);
+				PlantSeedInizialization.Initialize(services);
             }
 
             // Configure the HTTP request pipeline.
@@ -83,22 +83,6 @@ namespace GardenMonitoring
             app.MapRazorPages();
 
             app.Run();
-        }
-        private static async Task SeedRoles(IServiceProvider serviceProvider)
-        {
-	        var roleManager = serviceProvider.GetRequiredService<RoleManager<IdentityRole>>();
-
-	        var roles = new[] { "Agronomist", "Agricultural" };
-
-	        foreach (var roleName in roles)
-	        {
-		        var roleExists = await roleManager.RoleExistsAsync(roleName);
-		        if (!roleExists)
-		        {
-			        var role = new IdentityRole(roleName);
-			        await roleManager.CreateAsync(role);
-		        }
-	        }
         }
 	}
 }

@@ -13,7 +13,7 @@ namespace GardenMonitoring.Models
                     DbContextOptions<PlantContext>>());
             if (context?.Plant == null)
             {
-                throw new ArgumentNullException(nameof(context), "Null movie logic context!");
+                throw new ArgumentNullException(nameof(context), "Null plants logic context!");
             }
 
             
