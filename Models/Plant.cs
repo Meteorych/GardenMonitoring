@@ -1,6 +1,4 @@
 ﻿using Microsoft.AspNetCore.Authorization;
-using System.Collections;
-using System.ComponentModel.DataAnnotations.Schema;
 using Microsoft.Build.Framework;
 
 namespace GardenMonitoring.Models

@@ -1,0 +1,30 @@
+﻿@using Microsoft.AspNetCore.Identity
+@inject SignInManager<ApplicationUser> SignInManager
+
+
+<ul class="navbar-nav flex-grow-1">
+	@if (SignInManager.IsSignedIn(User))
+	{
+		@if (User.IsInRole("Agronomist"))
+		{
+			<li class="nav-item">
+				<a class="nav-link text-white" asp-area="" asp-controller="PlantStates" asp-action="Index">System</a>
+			</li>
+			<li class="nav-item">
+				<a class="nav-link text-white" asp-area="" asp-controller="Plants" asp-action="Index">Statistics</a>
+			</li>
+		}
+		@if (User.IsInRole("Agricultural"))
+		{
+			<li class="nav-item">
+				<a class="nav-link text-white" asp-area="" asp-controller="PlantStates" asp-action="Index">Plants State</a>
+			</li>
+			<li class="nav-item">
+				<a class="nav-link text-white" asp-area="" asp-controller="Plants" asp-action="Index">Helper</a>
+			</li>
+		}
+	}
+	<li class="nav-item">
+		<a class="nav-link text-white" asp-area="" asp-controller="Settings" asp-action="Index">Settings</a>
+	</li>
+</ul>

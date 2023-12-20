@@ -1,13 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.Rendering;
+﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using GardenMonitoring.Data;
 using GardenMonitoring.Models;
-using Microsoft.AspNetCore.Authorization;
 
 namespace GardenMonitoring.Controllers
 {
@@ -92,24 +86,6 @@ namespace GardenMonitoring.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
-            return View(settings);
-        }
-
-        // GET: Settings/Delete/5
-        public async Task<IActionResult> Delete(int? id)
-        {
-            if (id == null)
-            {
-                return NotFound();
-            }
-
-            var settings = await _context.Settings
-                .FirstOrDefaultAsync(m => m.Id == id);
-            if (settings == null)
-            {
-                return NotFound();
-            }
-
             return View(settings);
         }
 

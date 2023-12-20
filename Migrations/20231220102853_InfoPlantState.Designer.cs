@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace GardenMonitoring.Migrations
 {
     [DbContext(typeof(PlantContext))]
-    [Migration("20231213152333_PlantCreation")]
-    partial class PlantCreation
+    [Migration("20231220102853_InfoPlantState")]
+    partial class InfoPlantState
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -35,6 +35,9 @@ namespace GardenMonitoring.Migrations
 
                     b.Property<int>("ClassId")
                         .HasColumnType("int");
+
+                    b.Property<string>("Info")
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Name")
                         .IsRequired()
@@ -91,6 +94,43 @@ namespace GardenMonitoring.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("PlantState");
+                });
+
+            modelBuilder.Entity("GardenMonitoring.Models.Settings", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<int>("MaxHumidity")
+                        .HasColumnType("int");
+
+                    b.Property<int>("MaxLight")
+                        .HasColumnType("int");
+
+                    b.Property<int>("MaxPressure")
+                        .HasColumnType("int");
+
+                    b.Property<int>("MaxTemperature")
+                        .HasColumnType("int");
+
+                    b.Property<int>("MinHumidity")
+                        .HasColumnType("int");
+
+                    b.Property<int>("MinLight")
+                        .HasColumnType("int");
+
+                    b.Property<int>("MinPressure")
+                        .HasColumnType("int");
+
+                    b.Property<int>("MinTemperature")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Settings");
                 });
 #pragma warning restore 612, 618
         }

@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.EntityFrameworkCore;
 using GardenMonitoring.Models;
 
 namespace GardenMonitoring.Data
@@ -14,9 +10,9 @@ namespace GardenMonitoring.Data
         {
         }
 
-        public DbSet<GardenMonitoring.Models.Plant> Plant { get; set; } = default!;
-        public DbSet<GardenMonitoring.Models.PlantClass> PlantClass { get; set; } = default!;
-        public DbSet<GardenMonitoring.Models.PlantState> PlantState { get; set; } = default!;
-        public DbSet<GardenMonitoring.Models.Settings> Settings { get; set; } = default!;
+        public DbSet<Plant> Plant { get; set; } = default!;
+        public DbSet<PlantClass> PlantClass { get; set; } = default!;
+        public DbSet<PlantState> PlantState { get; set; } = default!;
+        public DbSet<Settings> Settings { get; set; } = default!;
     }
 }

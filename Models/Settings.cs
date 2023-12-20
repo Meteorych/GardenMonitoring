@@ -1,6 +1,4 @@
-﻿using Microsoft.AspNetCore.Authorization;
-
-namespace GardenMonitoring.Models
+﻿namespace GardenMonitoring.Models
 {
 	public class Settings
 	{

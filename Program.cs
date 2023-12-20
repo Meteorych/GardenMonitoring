@@ -1,10 +1,8 @@
-using System.Numerics;
 using GardenMonitoring.Data;
 using GardenMonitoring.Models;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
-using NuGet.Protocol.Plugins;
 
 namespace GardenMonitoring
 {

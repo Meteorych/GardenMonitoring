@@ -1,6 +1,4 @@
-﻿using GardenMonitoring.Data;
-using Microsoft.AspNetCore.Identity;
-using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.AspNetCore.Identity;
 
 namespace GardenMonitoring.Models
 {
