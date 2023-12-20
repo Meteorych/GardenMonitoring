@@ -1,0 +1,24 @@
+﻿@model Plant
+
+@{
+	ViewData["Title"] = "Helper";
+}
+
+@{
+}
+<div class="container">
+	<div class="row justify-content-center">
+		<div class="col-md-4">
+			<div class="md-form active-cyan-2 mb-3" align="center">
+				<form asp-action="Helper" method="get" class="d-flex justify-content-center">
+					<div asp-validation-summary="ModelOnly" class="text-danger"></div>
+					<input asp-for="Name" class="form-control me-2" type="text" placeholder="Name of plant" aria-label="Search" autocomplete="Name">
+					<button class="btn btn-dark" type="submit">Search</button>
+				</form>
+			</div>
+		</div>
+	</div>
+	<output class ="output-text mt-5"> @Html.DisplayFor(modelItem => modelItem.Info)</output>
+</div>
+
+
