@@ -1,37 +1,42 @@
-﻿@model IEnumerable<GardenMonitoring.Models.PlantState>
+﻿@model GardenMonitoring.Models.PlantStateSettingsViewModel
+
 
 @{
-    ViewData["Title"] = "Index";
+    ViewData["Title"] = "Plant's states";
 }
 
-<h1>Index</h1>
+<h1>Environment Data</h1>
 
 <table class="table">
-    <thead>
-    <tr>
-	    <th>
-		    @Html.DisplayNameFor(model => model.Plant.Name)
-	    </th>
-	    <th>
-		    @Html.DisplayNameFor(model => model.TimeStamp)
-	    </th>
-	    <th>
-		    @Html.DisplayNameFor(model => model.Temperature)
-	    </th>
-	    <th>
-		    @Html.DisplayNameFor(model => model.Light)
-	    </th>
-	    <th>
-		    @Html.DisplayNameFor(model => model.Pressure)
-	    </th>
-	    <th>
-		    @Html.DisplayNameFor(model => model.Humidity)
-	    </th>
-	    <th></th>
-    </tr>
-    </thead>
+	<thead>
+	
+
+	
+		<tr>
+			<th>
+				@Html.DisplayNameFor(model => model.PlantStates[0].Plant)
+			</th>
+			<th>
+					@Html.DisplayNameFor(model => model.PlantStates[0].TimeStamp)
+			</th>
+			<th>
+				@Html.DisplayNameFor(model => model.PlantStates[0].Temperature)
+			</th>
+			<th>
+				@Html.DisplayNameFor(model => model.PlantStates[0].Light)
+			</th>
+			<th>
+				@Html.DisplayNameFor(model => model.PlantStates[0].Pressure)
+			</th>
+			<th>
+				@Html.DisplayNameFor(model => model.PlantStates[0].Humidity)
+			</th>
+			<th></th>
+		</tr>
+	
+	</thead>
     <tbody>
-@foreach (var item in Model) {
+@foreach (var item in Model.PlantStates) {
 	<tr>
 		<td>
 			@Html.DisplayFor(modelItem => item.Plant.Name)
@@ -39,19 +44,27 @@
 		<td>
 			@Html.DisplayFor(modelItem => item.TimeStamp)
 		</td>
-		<td>
-			@Html.DisplayFor(modelItem => item.Temperature)
+		<td style="color: @IsValueInRange(item.Temperature, Model.Settings.MinTemperature, Model.Settings.MaxTemperature)">
+			@Html.DisplayFor(modelItem => item.Temperature)°C
 		</td>
-		<td>
-			@Html.DisplayFor(modelItem => item.Light)
+				<td style="color: @IsValueInRange(item.Light, Model.Settings.MinLight, Model.Settings.MaxLight)">
+			@Html.DisplayFor(modelItem => item.Light) LUX
 		</td>
-		<td>
-			@Html.DisplayFor(modelItem => item.Pressure)
+				<td style="color: @IsValueInRange(item.Pressure, Model.Settings.MinPressure, Model.Settings.MaxPressure)">
+			@Html.DisplayFor(modelItem => item.Pressure) mm
 		</td>
-		<td>
-			@Html.DisplayFor(modelItem => item.Humidity)
+				<td style="color: @IsValueInRange(item.Humidity, Model.Settings.MinHumidity, Model.Settings.MaxHumidity)">
+			@Html.DisplayFor(modelItem => item.Humidity)%
 		</td>
 	</tr>
 }
     </tbody>
 </table>
+
+
+@functions {
+	public string IsValueInRange(int value, int min, int max)
+	{
+		return value >= min && value <= max ? "#00ff00" : "red";
+	}
+}

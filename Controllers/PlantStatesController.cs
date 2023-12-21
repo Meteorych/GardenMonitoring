@@ -17,10 +17,17 @@ namespace GardenMonitoring.Controllers
         // GET: PlantStates
         public async Task<IActionResult> Index()
         {
-	        var plantStates = _context.PlantState
-		        .Include(d => d.Plant)
-		        .AsNoTracking();
-            return View(await plantStates.ToListAsync());
+            
+            
+			var viewModel = new PlantStateSettingsViewModel
+			{
+				PlantStates = await _context.PlantState
+					.Include(d => d.Plant)
+					.AsNoTracking()
+					.ToListAsync(),
+				Settings = await _context.Settings.FirstAsync()
+			};
+			return View("Index", viewModel);
         }
 
       

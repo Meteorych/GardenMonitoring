@@ -1,4 +1,4 @@
-﻿@model IEnumerable<GardenMonitoring.Models.Settings>
+﻿@model GardenMonitoring.Models.Settings
 
 @{
     ViewData["Title"] = "Index";
@@ -37,37 +37,37 @@
         </tr>
     </thead>
     <tbody>
-@foreach (var item in Model) {
+
         <tr>
             <td>
-                @Html.DisplayFor(modelItem => item.MaxTemperature)
+                @Html.DisplayFor(modelItem => modelItem.MaxTemperature)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.MinTemperature)
+                @Html.DisplayFor(modelItem => modelItem.MinTemperature)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.MaxLight)
+                @Html.DisplayFor(modelItem => modelItem.MaxLight)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.MinLight)
+                @Html.DisplayFor(modelItem => modelItem.MinLight)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.MaxPressure)
+                @Html.DisplayFor(modelItem => modelItem.MaxPressure)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.MinPressure)
+                @Html.DisplayFor(modelItem => modelItem.MinPressure)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.MaxHumidity)
+                @Html.DisplayFor(modelItem => modelItem.MaxHumidity)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.MinHumidity)
+                @Html.DisplayFor(modelItem => modelItem.MinHumidity)
             </td>
             <td>
-                <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
-                <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
+                <a asp-action="Edit" asp-route-id="@Model.Id">Edit</a> |
+                <a asp-action="Details" asp-route-id="@Model.Id">Details</a>
             </td>
         </tr>
-}
+
     </tbody>
 </table>

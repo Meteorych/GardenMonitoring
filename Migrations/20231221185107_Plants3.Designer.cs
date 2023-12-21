@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace GardenMonitoring.Migrations
 {
     [DbContext(typeof(PlantContext))]
-    [Migration("20231221155609_PlantCreation1")]
-    partial class PlantCreation1
+    [Migration("20231221185107_Plants3")]
+    partial class Plants3
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -47,7 +47,7 @@ namespace GardenMonitoring.Migrations
 
                     b.HasIndex("ClassId");
 
-                    b.ToTable("Plant", (string)null);
+                    b.ToTable("Plant");
                 });
 
             modelBuilder.Entity("GardenMonitoring.Models.PlantClass", b =>
@@ -64,7 +64,7 @@ namespace GardenMonitoring.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("PlantClass", (string)null);
+                    b.ToTable("PlantClass");
                 });
 
             modelBuilder.Entity("GardenMonitoring.Models.PlantState", b =>
@@ -89,7 +89,7 @@ namespace GardenMonitoring.Migrations
 
                     b.HasKey("PlantId");
 
-                    b.ToTable("PlantState", (string)null);
+                    b.ToTable("PlantState");
                 });
 
             modelBuilder.Entity("GardenMonitoring.Models.Sensor", b =>
@@ -109,7 +109,7 @@ namespace GardenMonitoring.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Sensor", (string)null);
+                    b.ToTable("Sensor");
                 });
 
             modelBuilder.Entity("GardenMonitoring.Models.Settings", b =>
@@ -146,7 +146,21 @@ namespace GardenMonitoring.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Settings", (string)null);
+                    b.ToTable("Settings");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            MaxHumidity = 85,
+                            MaxLight = 3500,
+                            MaxPressure = 900,
+                            MaxTemperature = 30,
+                            MinHumidity = 65,
+                            MinLight = 2500,
+                            MinPressure = 730,
+                            MinTemperature = 20
+                        });
                 });
 
             modelBuilder.Entity("GardenMonitoring.Models.Plant", b =>

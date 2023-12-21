@@ -16,3 +16,4 @@
 		public int MinHumidity { get; set; }
 	}
 }
+

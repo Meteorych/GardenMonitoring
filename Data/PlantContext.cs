@@ -13,15 +13,26 @@ namespace GardenMonitoring.Data
         public DbSet<Plant> Plant { get; set; } = default!;
         public DbSet<PlantClass> PlantClass { get; set; } = default!;
         public DbSet<PlantState> PlantState { get; set; } = default!;
+        public DbSet<Sensor> Sensor { get; set; } = default!;
         public DbSet<Settings> Settings { get; set; } = default!;
-   //     protected override void OnModelCreating(ModelBuilder modelBuilder)
-   //     {
-	  //      modelBuilder.Entity<PlantClass>().ToTable("PlantClass");
-			//modelBuilder.Entity<Plant>().ToTable("Plant");
-	  //      modelBuilder.Entity<PlantState>().ToTable("PlantState");
-	  //      modelBuilder.Entity<Settings>().ToTable("Settings");
-	  //      modelBuilder.Entity<Sensor>().ToTable("Sensor");
-   //     }
-        public DbSet<GardenMonitoring.Models.Sensor> Sensor { get; set; } = default!;
+		protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            modelBuilder.Entity<Settings>().HasData(new Settings()
+            {
+						Id = 1,
+			            MaxHumidity = 85,
+			            MinHumidity = 65,
+			            MinLight = 2500,
+			            MaxLight = 3500,
+			            MinPressure = 730,
+			            MaxPressure = 900,
+			            MinTemperature = 20,
+			            MaxTemperature = 30
+		    }
+            
+            );
+
+        }
+        
 	}
 }

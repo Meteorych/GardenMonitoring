@@ -1,14 +1,12 @@
-﻿@model IEnumerable<GardenMonitoring.Models.Sensor>
+﻿@using Microsoft.AspNetCore.Html
+@model IEnumerable<GardenMonitoring.Models.Sensor>
 
 @{
-    ViewData["Title"] = "Index";
+    ViewData["Title"] = "Sensor";
 }
 
-<h1>Index</h1>
+<h1>Sensor's Information</h1>
 
-<p>
-    <a asp-action="Create">Create New</a>
-</p>
 <table class="table">
     <thead>
         <tr>
@@ -28,7 +26,7 @@
                 @Html.DisplayFor(modelItem => item.SensorType)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.SensorState)
+                @IsInGoodState(item.SensorState)
             </td>
             <td>
                 <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
@@ -39,3 +37,13 @@
 }
     </tbody>
 </table>
+
+            
+@functions
+{
+    public IHtmlContent IsInGoodState(bool state)
+    {
+		return state ? new HtmlString("<p style = \"color: #00ff00\">OK</p>") : new HtmlString("<p style = \"color: red\">Warning</p>");
+    }
+
+}

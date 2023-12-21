@@ -52,7 +52,7 @@ namespace GardenMonitoring
             {
                 var services = scope.ServiceProvider;
                 RolesSeedInitialization.Initialize(services);
-				PlantSeedInizialization.Initialize(services);
+				PlantSeedInitialization.Initialize(services);
             }
 
             // Configure the HTTP request pipeline.

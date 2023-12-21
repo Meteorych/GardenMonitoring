@@ -15,9 +15,9 @@ namespace GardenMonitoring.Controllers
         }
 
         // GET: Settings
-        public async Task<IActionResult> Index()
+        public Task<IActionResult> Index()
         {
-            return View(await _context.Settings.ToListAsync());
+            return Task.FromResult<IActionResult>(View(_context.Settings.First()));
         }
 
         // GET: Settings/Details/5
@@ -28,12 +28,7 @@ namespace GardenMonitoring.Controllers
                 return NotFound();
             }
 
-            var settings = await _context.Settings
-                .FirstOrDefaultAsync(m => m.Id == id);
-            if (settings == null)
-            {
-                return NotFound();
-            }
+            var settings = await _context.Settings.FirstAsync();
 
             return View(settings);
         }
@@ -46,12 +41,8 @@ namespace GardenMonitoring.Controllers
                 return NotFound();
             }
 
-            var settings = await _context.Settings.FindAsync(id);
-            if (settings == null)
-            {
-                return NotFound();
-            }
-            return View(settings);
+            var settings = await _context.Settings.FirstAsync();
+			return View(settings);
         }
 
         // POST: Settings/Edit/5
@@ -89,24 +80,10 @@ namespace GardenMonitoring.Controllers
             return View(settings);
         }
 
-        // POST: Settings/Delete/5
-        [HttpPost, ActionName("Delete")]
-        [ValidateAntiForgeryToken]
-        public async Task<IActionResult> DeleteConfirmed(int id)
-        {
-            var settings = await _context.Settings.FindAsync(id);
-            if (settings != null)
-            {
-                _context.Settings.Remove(settings);
-            }
-
-            await _context.SaveChangesAsync();
-            return RedirectToAction(nameof(Index));
-        }
 
         private bool SettingsExists(int id)
         {
-            return _context.Settings.Any(e => e.Id == id);
+            return (true);
         }
     }
 }

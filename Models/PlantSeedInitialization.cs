@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace GardenMonitoring.Models
 {
-    public class PlantSeedInizialization
+    public class PlantSeedInitialization
     {
         public static void Initialize(IServiceProvider serviceProvider)
         {
@@ -16,7 +16,7 @@ namespace GardenMonitoring.Models
             }
 
             
-            if (context.Plant.Any() && context.PlantState.Any() && context.PlantClass.Any() && context.Settings.Any() && context.Sensor.Any())
+            if (context.Plant.Any() && context.PlantState.Any() && context.PlantClass.Any() && context.Sensor.Any())
             {
                 return; // DB has been seeded
             }
@@ -78,7 +78,7 @@ namespace GardenMonitoring.Models
 			            PlantId = 1, 
 			            Pressure = 780,
 			            Temperature = 27,
-			            TimeStamp = dateStart.AddSeconds(new Random().Next((DateTime.Now - dateStart).Seconds))
+			            TimeStamp = dateStart.AddSeconds(new Random().Next((int)(DateTime.Now - dateStart).TotalSeconds))
 
 		            },
 		            new PlantState
@@ -92,24 +92,6 @@ namespace GardenMonitoring.Models
 					}
 	            );
 			}
-
-            if (!context.Settings.Any())
-            {
-	            context.Settings.AddRange(
-		            new Settings
-		            {
-			            MaxHumidity = 85,
-						MinHumidity = 65,
-			            MinLight = 2500,
-						MaxLight = 3500,
-			            MinPressure = 730,
-						MaxPressure = 900,
-			            MinTemperature = 20,
-						MaxTemperature = 30
-		            }
-	            );
-
-            }
 
             if (!context.Sensor.Any())
             {

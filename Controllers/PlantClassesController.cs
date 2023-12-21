@@ -20,46 +20,6 @@ namespace GardenMonitoring.Controllers
             return View(await _context.PlantClass.ToListAsync());
         }
 
-        // GET: PlantClasses/Details/5
-        public async Task<IActionResult> Details(int? id)
-        {
-            if (id == null)
-            {
-                return NotFound();
-            }
-
-            var plantClass = await _context.PlantClass
-                .FirstOrDefaultAsync(m => m.Id == id);
-            if (plantClass == null)
-            {
-                return NotFound();
-            }
-
-            return View(plantClass);
-        }
-
-        // GET: PlantClasses/Create
-        public IActionResult Create()
-        {
-            return View();
-        }
-
-        // POST: PlantClasses/Create
-        // To protect from overposting attacks, enable the specific properties you want to bind to.
-        // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,Name")] PlantClass plantClass)
-        {
-            if (ModelState.IsValid)
-            {
-                _context.Add(plantClass);
-                await _context.SaveChangesAsync();
-                return RedirectToAction(nameof(Index));
-            }
-            return View(plantClass);
-        }
-
         // GET: PlantClasses/Edit/5
         public async Task<IActionResult> Edit(int? id)
         {
@@ -108,24 +68,6 @@ namespace GardenMonitoring.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
-            return View(plantClass);
-        }
-
-        // GET: PlantClasses/Delete/5
-        public async Task<IActionResult> Delete(int? id)
-        {
-            if (id == null)
-            {
-                return NotFound();
-            }
-
-            var plantClass = await _context.PlantClass
-                .FirstOrDefaultAsync(m => m.Id == id);
-            if (plantClass == null)
-            {
-                return NotFound();
-            }
-
             return View(plantClass);
         }
 

@@ -5,7 +5,7 @@
 namespace GardenMonitoring.Migrations
 {
     /// <inheritdoc />
-    public partial class PlantCreation1 : Migration
+    public partial class Plants3 : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
