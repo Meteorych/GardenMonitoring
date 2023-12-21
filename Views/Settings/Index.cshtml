@@ -6,68 +6,44 @@
 
 <h1>Index</h1>
 
-<table class="table">
-    <thead>
-        <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.MaxTemperature)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.MinTemperature)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.MaxLight)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.MinLight)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.MaxPressure)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.MinPressure)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.MaxHumidity)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.MinHumidity)
-            </th>
-            <th></th>
-        </tr>
-    </thead>
-    <tbody>
-
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => modelItem.MaxTemperature)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => modelItem.MinTemperature)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => modelItem.MaxLight)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => modelItem.MinLight)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => modelItem.MaxPressure)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => modelItem.MinPressure)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => modelItem.MaxHumidity)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => modelItem.MinHumidity)
-            </td>
-            <td>
-                <a asp-action="Edit" asp-route-id="@Model.Id">Edit</a> |
-                <a asp-action="Details" asp-route-id="@Model.Id">Details</a>
-            </td>
-        </tr>
-
-    </tbody>
+<table class="table table-bordered">
+	<tbody>
+	<tr>
+		<th>@Html.DisplayNameFor(model => model.MaxTemperature)</th>
+		<td>@Html.DisplayFor(modelItem => modelItem.MaxTemperature)</td>
+	</tr>
+	<tr>
+		<th>@Html.DisplayNameFor(model => model.MinTemperature)</th>
+		<td>@Html.DisplayFor(modelItem => modelItem.MinTemperature)</td>
+	</tr>
+	<tr>
+		<th>@Html.DisplayNameFor(model => model.MaxLight)</th>
+		<td>@Html.DisplayFor(modelItem => modelItem.MaxLight)</td>
+	</tr>
+	<tr>
+		<th>@Html.DisplayNameFor(model => model.MinLight)</th>
+		<td>@Html.DisplayFor(modelItem => modelItem.MinLight)</td>
+	</tr>
+	<tr>
+		<th>@Html.DisplayNameFor(model => model.MaxPressure)</th>
+		<td>@Html.DisplayFor(modelItem => modelItem.MaxPressure)</td>
+	</tr>
+	<tr>
+		<th>@Html.DisplayNameFor(model => model.MinPressure)</th>
+		<td>@Html.DisplayFor(modelItem => modelItem.MinPressure)</td>
+	</tr>
+	<tr>
+		<th>@Html.DisplayNameFor(model => model.MaxHumidity)</th>
+		<td>@Html.DisplayFor(modelItem => modelItem.MaxHumidity)</td>
+	</tr>
+	<tr>
+		<th>@Html.DisplayNameFor(model => model.MinHumidity)</th>
+		<td>@Html.DisplayFor(modelItem => modelItem.MinHumidity)</td>
+	</tr>
+	</tbody>
 </table>
+<div align="center"> 
+	<a asp-action="Edit" class="h4">Edit</a>
+</div>
+
+
