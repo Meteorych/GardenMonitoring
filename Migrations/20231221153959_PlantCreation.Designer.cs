@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace GardenMonitoring.Migrations
 {
     [DbContext(typeof(PlantContext))]
-    [Migration("20231215083122_SettingsPlantCreation")]
-    partial class SettingsPlantCreation
+    [Migration("20231221153959_PlantCreation")]
+    partial class PlantCreation
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -36,13 +36,18 @@ namespace GardenMonitoring.Migrations
                     b.Property<int>("ClassId")
                         .HasColumnType("int");
 
+                    b.Property<string>("Info")
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<string>("Name")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
 
-                    b.ToTable("Plant");
+                    b.HasIndex("ClassId");
+
+                    b.ToTable("Plant", (string)null);
                 });
 
             modelBuilder.Entity("GardenMonitoring.Models.PlantClass", b =>
@@ -59,24 +64,18 @@ namespace GardenMonitoring.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("PlantClass");
+                    b.ToTable("PlantClass", (string)null);
                 });
 
             modelBuilder.Entity("GardenMonitoring.Models.PlantState", b =>
                 {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
+                    b.Property<int>("PlantId")
                         .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
                     b.Property<int>("Humidity")
                         .HasColumnType("int");
 
                     b.Property<int>("Light")
-                        .HasColumnType("int");
-
-                    b.Property<int>("PlantId")
                         .HasColumnType("int");
 
                     b.Property<int>("Pressure")
@@ -88,9 +87,29 @@ namespace GardenMonitoring.Migrations
                     b.Property<DateTime>("TimeStamp")
                         .HasColumnType("datetime2");
 
+                    b.HasKey("PlantId");
+
+                    b.ToTable("PlantState", (string)null);
+                });
+
+            modelBuilder.Entity("GardenMonitoring.Models.Sensor", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<bool>("SensorState")
+                        .HasColumnType("bit");
+
+                    b.Property<string>("SensorType")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
                     b.HasKey("Id");
 
-                    b.ToTable("PlantState");
+                    b.ToTable("Sensor");
                 });
 
             modelBuilder.Entity("GardenMonitoring.Models.Settings", b =>
@@ -127,7 +146,29 @@ namespace GardenMonitoring.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Settings");
+                    b.ToTable("Settings", (string)null);
+                });
+
+            modelBuilder.Entity("GardenMonitoring.Models.Plant", b =>
+                {
+                    b.HasOne("GardenMonitoring.Models.PlantClass", "Class")
+                        .WithMany()
+                        .HasForeignKey("ClassId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Class");
+                });
+
+            modelBuilder.Entity("GardenMonitoring.Models.PlantState", b =>
+                {
+                    b.HasOne("GardenMonitoring.Models.Plant", "Plant")
+                        .WithMany()
+                        .HasForeignKey("PlantId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Plant");
                 });
 #pragma warning restore 612, 618
         }

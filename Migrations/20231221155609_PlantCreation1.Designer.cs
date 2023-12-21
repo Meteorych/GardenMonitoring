@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace GardenMonitoring.Migrations
 {
     [DbContext(typeof(PlantContext))]
-    [Migration("20231221071941_PlantModelCreation")]
-    partial class PlantModelCreation
+    [Migration("20231221155609_PlantCreation1")]
+    partial class PlantCreation1
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -47,7 +47,7 @@ namespace GardenMonitoring.Migrations
 
                     b.HasIndex("ClassId");
 
-                    b.ToTable("Plant");
+                    b.ToTable("Plant", (string)null);
                 });
 
             modelBuilder.Entity("GardenMonitoring.Models.PlantClass", b =>
@@ -64,24 +64,18 @@ namespace GardenMonitoring.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("PlantClass");
+                    b.ToTable("PlantClass", (string)null);
                 });
 
             modelBuilder.Entity("GardenMonitoring.Models.PlantState", b =>
                 {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
+                    b.Property<int>("PlantId")
                         .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
                     b.Property<int>("Humidity")
                         .HasColumnType("int");
 
                     b.Property<int>("Light")
-                        .HasColumnType("int");
-
-                    b.Property<int>("PlantId")
                         .HasColumnType("int");
 
                     b.Property<int>("Pressure")
@@ -93,11 +87,29 @@ namespace GardenMonitoring.Migrations
                     b.Property<DateTime>("TimeStamp")
                         .HasColumnType("datetime2");
 
+                    b.HasKey("PlantId");
+
+                    b.ToTable("PlantState", (string)null);
+                });
+
+            modelBuilder.Entity("GardenMonitoring.Models.Sensor", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<bool>("SensorState")
+                        .HasColumnType("bit");
+
+                    b.Property<string>("SensorType")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
                     b.HasKey("Id");
 
-                    b.HasIndex("PlantId");
-
-                    b.ToTable("PlantState");
+                    b.ToTable("Sensor", (string)null);
                 });
 
             modelBuilder.Entity("GardenMonitoring.Models.Settings", b =>
@@ -134,7 +146,7 @@ namespace GardenMonitoring.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Settings");
+                    b.ToTable("Settings", (string)null);
                 });
 
             modelBuilder.Entity("GardenMonitoring.Models.Plant", b =>
