@@ -67,6 +67,11 @@ namespace GardenMonitoring.Controllers
 			return plant == null ? View() : View("Helper", plant);
         }
 
+        public async Task<IActionResult> Statistics()
+        {
+            return View();
+        }
+
         private bool PlantExists(int id)
         {
             return _context.Plant.Any(e => e.Id == id);
