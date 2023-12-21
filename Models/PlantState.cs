@@ -7,6 +7,7 @@ namespace GardenMonitoring.Models
     {
         public int Id { get; set; }
         public int PlantId { get; set; }
+        public Plant Plant { get; set; }
         public DateTime TimeStamp { get; set; }
         public int Temperature { get; set; }
         public int Light { get; set; }

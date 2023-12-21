@@ -1,27 +1,31 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using GardenMonitoring.Data;
 using GardenMonitoring.Models;
 
-namespace GardenMonitoring.Controllers
+namespace GardenMonitoring.Views
 {
-    public class PlantStatesController : Controller
+    public class SensorsController : Controller
     {
         private readonly PlantContext _context;
 
-        public PlantStatesController(PlantContext context)
+        public SensorsController(PlantContext context)
         {
             _context = context;
         }
 
-        // GET: PlantStates
+        // GET: Sensors
         public async Task<IActionResult> Index()
         {
-            //var plantState = _context.PlantState.Include(d => d)
-            return View(await _context.PlantState.ToListAsync());
+            return View(await _context.Sensor.ToListAsync());
         }
 
-        // GET: PlantStates/Details/5
+        // GET: Sensors/Details/5
         public async Task<IActionResult> Details(int? id)
         {
             if (id == null)
@@ -29,39 +33,39 @@ namespace GardenMonitoring.Controllers
                 return NotFound();
             }
 
-            var plantState = await _context.PlantState
+            var sensor = await _context.Sensor
                 .FirstOrDefaultAsync(m => m.Id == id);
-            if (plantState == null)
+            if (sensor == null)
             {
                 return NotFound();
             }
 
-            return View(plantState);
+            return View(sensor);
         }
 
-        // GET: PlantStates/Create
+        // GET: Sensors/Create
         public IActionResult Create()
         {
             return View();
         }
 
-        // POST: PlantStates/Create
+        // POST: Sensors/Create
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,PlantId,TimeStamp,Temperature,Light,Pressure,Humidity")] PlantState plantState)
+        public async Task<IActionResult> Create([Bind("Id,SensorType,SensorState")] Sensor sensor)
         {
             if (ModelState.IsValid)
             {
-                _context.Add(plantState);
+                _context.Add(sensor);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            return View(plantState);
+            return View(sensor);
         }
 
-        // GET: PlantStates/Edit/5
+        // GET: Sensors/Edit/5
         public async Task<IActionResult> Edit(int? id)
         {
             if (id == null)
@@ -69,22 +73,22 @@ namespace GardenMonitoring.Controllers
                 return NotFound();
             }
 
-            var plantState = await _context.PlantState.FindAsync(id);
-            if (plantState == null)
+            var sensor = await _context.Sensor.FindAsync(id);
+            if (sensor == null)
             {
                 return NotFound();
             }
-            return View(plantState);
+            return View(sensor);
         }
 
-        // POST: PlantStates/Edit/5
+        // POST: Sensors/Edit/5
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,PlantId,TimeStamp,Temperature,Light,Pressure,Humidity")] PlantState plantState)
+        public async Task<IActionResult> Edit(int id, [Bind("Id,SensorType,SensorState")] Sensor sensor)
         {
-            if (id != plantState.Id)
+            if (id != sensor.Id)
             {
                 return NotFound();
             }
@@ -93,12 +97,12 @@ namespace GardenMonitoring.Controllers
             {
                 try
                 {
-                    _context.Update(plantState);
+                    _context.Update(sensor);
                     await _context.SaveChangesAsync();
                 }
                 catch (DbUpdateConcurrencyException)
                 {
-                    if (!PlantStateExists(plantState.Id))
+                    if (!SensorExists(sensor.Id))
                     {
                         return NotFound();
                     }
@@ -109,10 +113,10 @@ namespace GardenMonitoring.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
-            return View(plantState);
+            return View(sensor);
         }
 
-        // GET: PlantStates/Delete/5
+        // GET: Sensors/Delete/5
         public async Task<IActionResult> Delete(int? id)
         {
             if (id == null)
@@ -120,34 +124,34 @@ namespace GardenMonitoring.Controllers
                 return NotFound();
             }
 
-            var plantState = await _context.PlantState
+            var sensor = await _context.Sensor
                 .FirstOrDefaultAsync(m => m.Id == id);
-            if (plantState == null)
+            if (sensor == null)
             {
                 return NotFound();
             }
 
-            return View(plantState);
+            return View(sensor);
         }
 
-        // POST: PlantStates/Delete/5
+        // POST: Sensors/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            var plantState = await _context.PlantState.FindAsync(id);
-            if (plantState != null)
+            var sensor = await _context.Sensor.FindAsync(id);
+            if (sensor != null)
             {
-                _context.PlantState.Remove(plantState);
+                _context.Sensor.Remove(sensor);
             }
 
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
 
-        private bool PlantStateExists(int id)
+        private bool SensorExists(int id)
         {
-            return _context.PlantState.Any(e => e.Id == id);
+            return _context.Sensor.Any(e => e.Id == id);
         }
     }
 }

@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace GardenMonitoring.Migrations
 {
     [DbContext(typeof(PlantContext))]
-    [Migration("20231220102853_InfoPlantState")]
-    partial class InfoPlantState
+    [Migration("20231221071941_PlantModelCreation")]
+    partial class PlantModelCreation
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -44,6 +44,8 @@ namespace GardenMonitoring.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("ClassId");
 
                     b.ToTable("Plant");
                 });
@@ -93,6 +95,8 @@ namespace GardenMonitoring.Migrations
 
                     b.HasKey("Id");
 
+                    b.HasIndex("PlantId");
+
                     b.ToTable("PlantState");
                 });
 
@@ -131,6 +135,28 @@ namespace GardenMonitoring.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Settings");
+                });
+
+            modelBuilder.Entity("GardenMonitoring.Models.Plant", b =>
+                {
+                    b.HasOne("GardenMonitoring.Models.PlantClass", "Class")
+                        .WithMany()
+                        .HasForeignKey("ClassId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Class");
+                });
+
+            modelBuilder.Entity("GardenMonitoring.Models.PlantState", b =>
+                {
+                    b.HasOne("GardenMonitoring.Models.Plant", "Plant")
+                        .WithMany()
+                        .HasForeignKey("PlantId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Plant");
                 });
 #pragma warning restore 612, 618
         }
