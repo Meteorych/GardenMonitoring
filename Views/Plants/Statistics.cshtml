@@ -1,3 +1,32 @@
-﻿<div class="container mt-3">
-	<h1 style="color: aqua">Sorry, for working charts knowledge of JavaScript is required... I promise that I'll do them in the future and I'll be real Fullstack Developer.</h1>
+﻿<div class="container mt-3">+
+/*
+	<h1 style="color: aqua">Sorry, for dynamically working charts knowledge of JavaScript is required... I promise that I'll do them in the future.</h1>
 </div>
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+<div style="width: 400px; height: 300px">
+    <canvas id="MyChart"></canvas>
+</div>
+
+<script>
+    const labels = ['Sep', 'Oct', 'Nov', 'Dec'];
+    const data = {
+        labels: labels,
+        datasets: [{
+            label: 'Rate of Plant\'s growth',
+            data: [65, 59, 80, 81],
+            fill: true,
+            borderColor: 'black',
+            tension: 0.1
+        }]
+    };
+    
+    const config = {
+        type: 'line',
+        data: data,
+    };
+
+    const ctx = document.getElementById('MyChart');
+    new Chart(ctx, config);
+</script>
