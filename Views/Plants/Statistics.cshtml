@@ -1,27 +1,81 @@
 ﻿<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 
-<div style="width: 600px; height: 500px">
-    <canvas id="MyChart"></canvas>
+
+<h1>
+    Statistics
+</h1>
+<div class="container mt-3">
+    <div class ="row justify-content-center">
+		<div style="width: 500px; height: 400px">
+			<canvas id="MyLineChart"></canvas>
+		</div>
+		    <div style="width: 500px; height: 400px">
+			    <canvas id ="MyCircleChart"></canvas>
+		</div>
+    </div>
 </div>
 
+
 <script>
-    const labels = ['Sep', 'Oct', 'Nov', 'Dec'];
-    const data = {
-        labels: labels,
+    Chart.defaults.color = "black";
+    const pieChartLabels = ['Healthy', 'Ill'];
+    const lineChartLabels = ['Sep', 'Oct', 'Nov', 'Dec'];
+
+    const lineChartData = {
+        labels: lineChartLabels,
         datasets: [{
             label: 'Rate of Plants\'s growth',
             data: [65, 59, 80, 81],
             fill: true,
-            borderColor: 'black',
-            tension: 0.1
+            borderColor: 'white',
+            tension: 0.1,
+            borderDashOffset: 'black'
         }]
     };
+    const pieChartData = {
+        labels: pieChartLabels,
+        datasets: [{
+            label: 'Health of plants',
+            data: [2, 1],
+            backgroundColor: [
+                'rgb(255, 99, 132)',
+                'rgb(54, 162, 235)',
+            ],
+            borderWidth: 0,
+            hoverOffset: 4
+        }]
+    }
     
-    const config = {
+    const lineChartConfig = {
         type: 'line',
-        data: data,
+        data: lineChartData,
+        options: {
+            scales: {
+                x: {
+                    grid: {
+                        color: 'black'
+                    }
+                },
+                y: {
+                    grid: {
+                        color: 'black'
+                    }
+                }
+            }
+        }
     };
 
-    const ctx = document.getElementById('MyChart');
-    new Chart(ctx, config);
+    const pieChartConfig = {
+        type: 'pie',
+        data: pieChartData
+    };
+
+    
+    const ctx1 = document.getElementById('MyLineChart');
+    const ctx2 = document.getElementById('MyCircleChart');
+
+    new Chart(ctx1, lineChartConfig);
+    new Chart(ctx2, pieChartConfig);
+    
+
 </script>
