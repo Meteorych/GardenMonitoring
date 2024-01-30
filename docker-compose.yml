@@ -1,0 +1,14 @@
+﻿services:
+  ms-sql-server:
+    image: rapidfort/microsoft-sql-server-2019-ib:latest
+    environment:
+        - ACCEPT_EULA=Y
+        - SA_PASSWORD="Secret"
+        - MSSQL_PID=Express      
+    restart: always
+    ports:
+        - "1433:1433"
+  garden-monitoring:
+    build: .
+    ports:
+       - "8080:80"

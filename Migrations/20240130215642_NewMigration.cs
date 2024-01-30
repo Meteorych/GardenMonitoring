@@ -2,10 +2,10 @@
 
 #nullable disable
 
-namespace GardenMonitoring.Migrations
+namespace GardenMonitoring.Data.Migrations
 {
     /// <inheritdoc />
-    public partial class Plants3 : Migration
+    public partial class NewMigration : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
